@@ -201,6 +201,8 @@
 		var ausschnitt = (punkteSpaziergang.getBounds());
 		
 		map.fitBounds(ausschnitt);
+		
+		map.locate({setview: true,maxZoom:16});
     </script>
 
 </body>
