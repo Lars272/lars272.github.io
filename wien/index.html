@@ -14,7 +14,14 @@
     <script src="citybike_punkte.json.js"></script>
     <script src="wanderwege_linien.json.js"></script>
     <script src="maerkte_flaechen.json.js"></script>
-
+	<script src="my_geojson.js"></script>
+	<script src="leaflet_hash.js"></script>
+	<script src="leaflet.markercluster.js"></script>
+	<script src="leaflet-routing-machine.js"></script>
+	<link rel="stylesheet" href="MarkerCluster.css" />
+	<link rel="stylesheet" href="MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="leaflet-routing-machine.css" />
+	
     <style>
 		body {
 			padding: 0;
@@ -39,10 +46,10 @@
 </head>
 
 <body>
-    <!--<h1>Stadtspaziergang Wien</h1>--!>
+    <!--<h1>Stadtspaziergang Wien</h1>-->
 
     <div id="wienMap"></div>
-    <!--<h3>Quelle Geodaten</h3>--!>
+    <!--<h3>Quelle Geodaten</h3>-->
     <p>
     Stadt Wien – <a href="http://data.wien.gv.at/">data.wien.gv.at</a><br>
     <a href="">Web Feature Service (WFS) - Wien</a><br>
@@ -89,6 +96,8 @@
             center: [48.20833, 16.373064],
             zoom: 12
         });
+		
+		var cluster_group = L.markerClusterGroup();
         // Maßstab hinzufügen
         L.control.scale({
             maxWidth: 200,
@@ -122,7 +131,7 @@
 			var spazier = '<h3>' + layer.feature.properties.NAME + layer.feature.properties.BEMERKUNG + layer.feature.properties.OBJECTID + layer.feature.properties.KATEGORIE + layer.feature.properties.ADRESSE +  '</h3>';
             spazier += '<a href="' + layer.feature.properties.WEITERE_INF + '">Infos</a>';
             return spazier;
-        }).addTo(map);
+        });//addTo(map);
            
         // GeoJSON Daten der Citybike Stationen laden und Popup erstellen
         var punkteCitybike = L.geoJSON(window.citybikePunkte, {
@@ -140,6 +149,9 @@
                     })
                 });
 			}
+		},
+		onEachFeature: function (feature, layer) {
+		var bike = '<h3>' + layer.feature.properties.STATION + '</h3>'; bike += '<p>' + layer.feature.properties.BEZIRK +'</p>';
 		}
         }).bindPopup(function(layer) {
             // TODO: HTML-Popupfenster mit STATION und BEZIRK
@@ -147,7 +159,8 @@
             
 			return bike;
         
-			}).addTo(map);
+			}).addTo(cluster_group);
+			map.addLayer(cluster_group);
 			
         // GeoJSON Daten der Wanderwege laden, nach Typ einfärben und Popup erstellen
         var linienWanderwege = L.geoJSON(window.wanderwegeLinien, {
@@ -166,7 +179,7 @@
             var tipp = '<h3>' + layer.feature.properties.BEZ_TEXT + '</h3>';
             tipp += '<a href="' + layer.feature.properties.URL_INFO + '">Infos</a>';
             return tipp;
-        }).addTo(map);
+        });//.addTo(map);
         // GeoJSON Daten der Märkte hinzufügen - https://www.data.gv.at/suche/?search-term=wien+m%C3%A4rkte&searchIn=catalog
         // TODO: Flächen nach property INFOS_NACHHALTIG einfärben
         // TODO: HTML-Popupfenster mit NAME, MARKTKATEGORIE, INFOS_NACHHALTIG, URL_MARKTAMT (als Link)
@@ -189,7 +202,7 @@
 			flaeche += '<p>' + layer.feature.properties.INFOS_NACHHALTIG +'</p>';
             flaeche += '<a href="' + layer.feature.properties.URL_MARKTAMT + '">Infos</a>';
             return flaeche;
-        }).addTo(map);
+        });//.addTo(map);
         // WMTS-Layer Auswahl und Marker Auswahl Overlay hinzufügen
         // TODO: WMTS-Layer Wien, Luftbild 1956 zur Hintergrundlayerauswahl hinzufügen
         // TODO: GeoJSON Layer Märkte ein/aus Overlay hinzufügen
@@ -203,17 +216,17 @@
 			"Luftbild 1956": layers.luftbild1956
         }, {
             "Stadtspaziergang Stationen": punkteSpaziergang,
-            "Citybike Standorte": punkteCitybike,
+            "Citybike Standorte": cluster_group,
             "Wandern in und um Wien": linienWanderwege,
 			"Märkte": maerkte
-        }).addTo(map)
+        }).addTo(map);
         // Ausschnitt setzen
         // TODO: Ausschnitt auf Stationen des Stadtpaziergangs setzen
 		var ausschnitt = (punkteSpaziergang.getBounds());
 		
 		//map.fitBounds(ausschnitt);
 		
-		map.locate({setView: true,maxZoom:16});
+		//map.locate({setView: true,maxZoom:16});
 		function onLocationFound(e) {
 		var radius = e.accuracy / 2;
 
@@ -224,6 +237,19 @@
 		}
 
 		map.on('locationfound', onLocationFound);
+		L.geoJSON(window.my_geojson).bindPopup(function(layer) {
+		return layer.feature.properties.color;
+		}).addTo(map);
+		
+		var hash = new L.Hash(map);
+		
+		L.Routing.control({
+			waypoints: [
+				L.latLng(47.26320, 11.402156),
+				L.latLng(48.22735, 16.35150)
+  ]
+}).addTo(map);
+		
     </script>
 
 </body>
