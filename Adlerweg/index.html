@@ -85,6 +85,24 @@
 		
 		//Etappe laden
 		L.geoJSON(window.etappe18).addTo(map);
+		
+		//Icons
+		var huts = [
+			L.marker([47.300833, 10.667778], { title: "Anhalter Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
+			L.marker([47.346389, 10.791111], { title: "Lorea Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
+		];
+		var hutsLayer = L.featureGroup();
+		for (var i=0; i<huts.length; i++) {
+			hutsLayer.addLayer(huts[i]);
+		}
+		//Zoomstufen anpassen und hutslayer addtomap
+		map.on("zoomend", function() {
+			if (map.getZoom() >= 15) {
+				map.addLayer(hutsLayer);
+			} else {
+				map.removeLayer(hutsLayer);
+			}
+		});
     </script>
 
 </body>
