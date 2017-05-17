@@ -8,10 +8,13 @@
     <title>basemap.at mit leaflet-hash Plugin</title>
 
     <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+	<link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css" />
     <script src="js/leaflet/leaflet.js"></script>
     <script src="js/leaflet-hash/leaflet-hash.js"></script>
 	<script src="data/AdlerwegEtappe18.js"></script>
-
+	<script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	
     <style>
         body {
             padding: 0px;
@@ -84,8 +87,13 @@
         var hash = new L.Hash(map);
 		
 		//Etappe laden
-		L.geoJSON(window.etappe18).addTo(map);
 		
+		console.log(window.etappe19);
+		var el = L.control.elevation();
+		el.addTo(map);
+		L.geoJSON(window.etappe18, {
+			onEachFeature: el.addData.bind(el)
+		}).addTo(map);
 		//Icons
 		var huts = [
 			L.marker([47.300833, 10.667778], { title: "Anhalter Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
