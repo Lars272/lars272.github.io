@@ -115,7 +115,7 @@
 		function loadTrack(track) {
 
 			// GPX Track laden
-			gpxTrack = omnivore.gpx('gpx/'+track).addTo(map);
+			gpxTrack = omnivore.gpx('data/'+track).addTo(map);
 
 			// nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
 			gpxTrack.on('ready', function () {
@@ -138,6 +138,7 @@
 				map.fitBounds(gpxTrack.getBounds());
 
 				// Höhenprofil erzeugen
+				profileControl.clear();
 				gpxTrack.eachLayer(function(layer) {
 					profileControl.addData(layer.feature);
 					
@@ -209,6 +210,7 @@
 		//zwischen Etappen hin und her schalten
 		var etappenSelector = document.getElementById("etappen");
 		etappenSelector.onchange = function () {
+			console.log(etappenSelector[etappenSelector.selectedIndex].value)
 		loadTrack(etappenSelector[etappenSelector.selectedIndex].value);
 		}
 		
