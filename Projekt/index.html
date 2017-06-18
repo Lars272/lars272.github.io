@@ -7,8 +7,24 @@
 
     <title>Mountainbiken im Aupatal</title>
 
-    <link rel="stylesheet" href="js/leaflet/leaflet.css" />
-	<link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css" />
+    <!-- Leaflet -->
+	<link rel="stylesheet" href="js/leaflet/leaflet.css" />
+    <script src="js/leaflet/leaflet.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	
+	<!-- Plugins -->
+
+    <script src="js/leaflet-hash/leaflet-hash.js"></script>
+
+    <link rel="stylesheet" href="plugins/leaflet-fullscreen/Control.FullScreen.css" />
+    <script src="plugins/leaflet-fullscreen/Control.FullScreen.js"></script>
+
+    <link rel="stylesheet" href="plugins/leaflet-sidebar/L.Control.Sidebar.css" />
+    <script src="plugins/leaflet-sidebar/L.Control.Sidebar.js"></script>
+	
+    <!-- CSS Style -->
+	<link rel="stylesheet" href="css/friaul.css" />
     
 	<script src="js/leaflet/leaflet.js"></script>
 	<script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
@@ -17,131 +33,45 @@
 	
 	
     <style>
-	
-        body {
-            padding: 0px;
-            margin: 0px;
-        }
-        html, body, #map {
-            height: 600px;
-            width: 1024px;
-			margin: auto;
-        }
     </style>
 </head>
 
 <body>
 
-	<h1>Mountainbike Touren im Aupatal</h1>
-	<p>Hier finden Sie tolle MTB-Routen rund um Dordolla und Moggio Udinese. Ein Klick auf die Route zeigt Ihnen Kriterien wie Gesamtlänge, Schwierigkeitsgrad, Höhenmeter etc. an. 
-	</p>
-    <div id="map"></div>
+	<div style="background-image: url('data/mtb.jpg')" id="topcontent">
 
-    <script>
-        // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
-        var layers = {
-            geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapgrau: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaphidpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaporthofoto30cm: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            osm: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                subdomains: ['a', 'b', 'c'],
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            })
-        };
+        <div id="pic_credits">
 
-        // Karte definieren
-        var map = L.map('map', {
-            layers: [layers.geolandbasemap],
-            center : [47.654, 13.370],
-            zoom : 8
-        });
+            Photo: Top of the World Mountainbike Trail by <a href="https://www.flickr.com/photos/ruthanddave/14684942448/">Ruth Hartnup</a>. <a style="none" href="https://creativecommons.org/licenses/by/2.0/">CC-BY-2.0</a>
 
-        // Maßstab hinzufügen
-        L.control.scale({
-            maxWidth: 200,
-            metric: true,
-            imperial: false
-        }).addTo(map);
+        </div>
 
-        // Höhenprofil control hinzufügen
-        var profileControl = L.control.elevation({
-            position : 'bottomleft',
-            theme : 'steelblue-theme'
-        });
-        profileControl.addTo(map);
+        <h1 id="header">MTB Tracks im Aupatal</h1>
 
-        // GPX Track laden
-        gpxTrack = omnivore.gpx('data/AdlerwegEtappe18.gpx').addTo(map);
+    </div>
 
-        // nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
-        gpxTrack.on('ready', function () {
-            // Popup hinzufügen
-            var markup = '<h3>Adlerweg-Etappe 18: Lorea Hütte – Anhalter Hütte</h3>';
-            markup += '<p>Die erste Etappe am Adlerweg führt vom St. Johanner Ortsteil Hinterkaiser zur Gaudeamushütte auf 1.263 Metern Seehöhe. Zei besondere Naturschauspiele entlang der Strecke sind der imposante Schleierwasserfall und die Höhle Diebsöfen.</p>'
-            markup += '<li>Ausgangspunkt: Lorea Hütte</li>';
-            markup += '<li>Endpunkt: Anhalter Hütte</li>';
-            markup += '<li>Höhenmeter bergauf: 1020</li>';
-            markup += '<li>Höhenmeter bergab: 1180</li>';
-            markup += '<li>Höchster Punkt: 2315</li>';
-            markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
-            markup += '<li>Streckenlänge (in km): 16</li>';
-            markup += '<li>Gehzeit (in Stunden): 6,5</li>';
-            markup += '<li>Einkehrmöglichkeiten: Hotel Schloss Fernstein#Lorea Hütte#Hintere Tarrentonalm#Anhalter Hütte</li>';
-            markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-18-lorea-huette-anhalter-huette">Weitere Informationen</a></li>';
-            gpxTrack.bindPopup(markup, { maxWidth : 450 });
+    <div id="linkbar">
 
-            // Ausschnitt setzen
-            map.fitBounds(gpxTrack.getBounds());
+        <ul>
+            <li><a class="active" href="https://andik1955.github.io/projekt/index.html">Übersicht Friaul</a></li>
+            <li><a href="https://lars272.github.io/projekt/index.html">Wanderwege</a></li>
+            <li><a href="https://linuskn.github.io/projekt/index.html">Radwege</a></li>
+        </ul>
 
-            // Höhenprofil erzeugen
-            gpxTrack.eachLayer(function(layer) {
-                profileControl.addData(layer.feature);
-            });
-        });
+    </div>
 
-        // WMTS-Layer Auswahl hinzufügen
-        var layerControl = L.control.layers({
-            "basemap.at - STANDARD": layers.geolandbasemap,
-            "basemap.at - GRAU": layers.bmapgrau,
-            "basemap.at - OVERLAY": layers.bmapoverlay,
-            "basemap.at - HIGH-DPI": layers.bmaphidpi,
-            "basemap.at - ORTHOFOTO": layers.bmaporthofoto30cm,
-            "OpenStreetMap": layers.osm,
-        },{
-            "Adlerweg Etappe 18" : gpxTrack
-        }).addTo(map);
-		
-		//Marker funktionieren nicht..
-		//var huts = ({
-			//L.marker([47.300833, 10.667778], { title: "Anhalter Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
-			//L.marker([47.346389, 10.791111], { title: "Lorea Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
-			//L.marker([47.346389, 10.791111], { title: "Lorea Hütte", icon: L.icon({ iconUrl:'icons/pin-export.png'}) }),
-		//}).addTo(map);
-		
-		
+    <div id="mapwrapper">
 
-    </script>
+        <div id="map"></div>
 	
-	<p> Lars Bechtel </p>
-<a href="https://github.com/Lars272"> Lars Bechtel </a>
-
+	<p> Autor: Lars Bechtel </p> 
+	<a href="https://github.com/Lars272"> Mein GitHub Repo </a>
+	<p> Mehr zum Aupa-Tal </p>
+	<a href="http://www.christopherthomson.net/"> Film: The New Wild </a>
+	<br>
+	<a href="http://www.quart.at/bibliothek/alle_ausgaben/nr_25_15/wo_baeume_in_haeusern_wohnen"> Artikel: Wo Bäume in Häuser wohnen </a>
+	<br>
+	<a href="https://www.uibk.ac.at/geographie/migration/am/italian_alps.html"> FWF Projekt der Universität Innsbruck im Aupatal </a>
 </body>
 
 </html>
