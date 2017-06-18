@@ -31,6 +31,8 @@
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script src="js/leaflet-omnivore/leaflet-omnivore.js"></script>
 	
+	<script src="map.js"></script>
+	
 	
     <style>
     </style>
@@ -54,8 +56,8 @@
 
         <ul>
             <li><a class="active" href="https://andik1955.github.io/projekt/index.html">Übersicht Friaul</a></li>
-            <li><a href="https://lars272.github.io/projekt/index.html">Wanderwege</a></li>
-            <li><a href="https://linuskn.github.io/projekt/index.html">Radwege</a></li>
+            <li><a href="https://linuskn.github.io/projekt/index.html">Wanderwege</a></li>
+            <li><a href="https://lars272.github.io/Projekt/index.html">Radwege</a></li>
         </ul>
 
     </div>
@@ -63,15 +65,71 @@
     <div id="mapwrapper">
 
         <div id="map"></div>
+		
+		 <div id="mapinfo">
+
+            <div id="info">Für mehr Informationen zur Strecke bitte auf den Track klicken.</div>
+
+            <h2>Name</h2>
+
+            <div id="regname"> - keine Provinz ausgewählt - </div>
+
+            <h3>Schwierigkeit</h3>
+
+            <div id="capname"> - </div>
+
+            <h3>Höhenmeter</h3>
+
+            <div id="bev"> - </div>
+
+            <h3>Download Link / Analoge Karte</h3>
+
+            <div id="description"> - </div>
+
+        </div>
+
+    </div>
 	
-	<p> Autor: Lars Bechtel </p> 
-	<a href="https://github.com/Lars272"> Mein GitHub Repo </a>
-	<p> Mehr zum Aupa-Tal </p>
-	<a href="http://www.christopherthomson.net/"> Film: The New Wild </a>
-	<br>
-	<a href="http://www.quart.at/bibliothek/alle_ausgaben/nr_25_15/wo_baeume_in_haeusern_wohnen"> Artikel: Wo Bäume in Häuser wohnen </a>
-	<br>
-	<a href="https://www.uibk.ac.at/geographie/migration/am/italian_alps.html"> FWF Projekt der Universität Innsbruck im Aupatal </a>
+	<div id="credits">
+
+        Autor: Lars Bechtel <a href="https://github.com/Lars272"> Find me on Github </a> 
+		<br> 
+		Herkunft der GPS Daten: Selbst digitalisiert und vom AC Carnia Bike, <a style="none" href="http://www.carniabike.it/">Carniabike </a> 
+		<br>  
+		Regione Autonoma Friuli Venezia Giulia - Open Data</a>, <a href="http://www.dati.gov.it/content/italian-open-data-license-v20">Italian Open Data License v2.0</a> 
+		<br> 
+		<br>
+		Mehr zum Aupa-Tal
+		<br>
+		<a href="http://www.christopherthomson.net/"> Film: The New Wild </a>
+		<br>
+		<a href="http://www.quart.at/bibliothek/alle_ausgaben/nr_25_15/wo_baeume_in_haeusern_wohnen"> Artikel: Wo Bäume in Häuser wohnen </a>
+		<br>
+		<a href="https://www.uibk.ac.at/geographie/migration/am/italian_alps.html"> FWF Projekt der Universität Innsbruck im Aupatal </a>
+
+        <div id="sidebar">
+            <h1>Informationen</h1>
+
+            <h2>Provinz</h2>
+
+            <div id="regname2"> - keine Provinz ausgewählt - </div>
+
+            <h3>Provinzhauptstadt</h3>
+
+            <div id="capname2"> - </div>
+
+            <h3>Einwohner</h3>
+
+            <div id="bev2"> - </div>
+
+            <h3>Kurzbeschreibung</h3>
+
+            <div id="description2"> - </div>
+
+        </div>
+
+    </div>
+	
 </body>
 
 </html>
