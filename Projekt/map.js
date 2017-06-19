@@ -11,6 +11,10 @@ window.onload = function() {
 		Esri_WorldImagery: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 		attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 		}),
+		OpenTopoMap: L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+		maxZoom: 17,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+		}),
     };
 
 
@@ -20,9 +24,9 @@ window.onload = function() {
 
     // Karte definieren
     var map = L.map('map', {
-        layers: [layers.Esri_WorldImagery],
+        layers: [layers.OpenTopoMap],
         center: [46.467727, 13.191869],
-        zoom: 9,
+        zoom: 12,
         zoomControl: true
     });
 
@@ -49,28 +53,6 @@ window.onload = function() {
 
     // add sidebar control
     map.addControl(sidebar);
-
-
-    //cluster group for alberghi
-    var cluster_group = L.markerClusterGroup();
-
-
-    // alberghi diffusi
-    var alb_dif = L.geoJSON(window.alberghi, {
-        pointToLayer: function(feature, latlng) {
-            return L.marker(latlng);
-        },
-        onEachFeature: function(feature, layer) {
-            var allInfo = '<h3>Name des Gasthofs</h3>';
-            allInfo += layer.feature.properties.denominazione;
-            allInfo += '<div>' + "<a href='" + layer.feature.properties.sito + "'>Weitere Informationen</a>" + '</div>';
-            layer.bindPopup(allInfo);
-            return allInfo;
-        }
-    }).addTo(cluster_group);
-
-    // add cluster to map
-    //map.addLayer(cluster_group);
 
     // leaflet-hash aktivieren
     var hash = new L.Hash(map);
@@ -250,6 +232,7 @@ window.onload = function() {
         "OpenStreetMap": layers.osm,
         "Hike & Bike": layers.hikeBike,
 		"Satellit":layers.Esri_WorldImagery,
+		"Topogaphisch":layers.OpenTopoMap,
     }, {
         "Region Friaul": overview,
         "Provinzen": subregions,
