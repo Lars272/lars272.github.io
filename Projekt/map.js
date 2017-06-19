@@ -1,19 +1,16 @@
 window.onload = function() {
-    // WMTS-Layer von OSM
+    // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
     var layers = {
-        osm: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            subdomains: ['a', 'b', 'c'],
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a> <br> &copy; <a href="http://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units">EuroGeographics bezüglich der Verwaltungsgrenzen</a>'
-        }),
-        hikeBike: L.tileLayer('http://{s}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a> <br> &copy; <a href="http://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units">EuroGeographics bezüglich der Verwaltungsgrenzen</a>'
-        }),
-		Esri_WorldImagery: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-		attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        OpenMapSurfer_Roads: L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+		maxZoom: 22,
+		attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}),
 		OpenTopoMap: L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 		maxZoom: 17,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+		}),
+		Esri_WorldImagery: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 		}),
     };
 
@@ -26,7 +23,7 @@ window.onload = function() {
     var map = L.map('map', {
         layers: [layers.OpenTopoMap],
         center: [46.467727, 13.191869],
-        zoom: 12,
+        zoom: 13,
         zoomControl: true
     });
 
@@ -53,6 +50,9 @@ window.onload = function() {
 
     // add sidebar control
     map.addControl(sidebar);
+
+    // add cluster to map
+    //map.addLayer(cluster_group);
 
     // leaflet-hash aktivieren
     var hash = new L.Hash(map);
@@ -229,14 +229,12 @@ window.onload = function() {
 
     // WMTS-Layer Auswahl hinzufügen
     var layerControl = L.control.layers({
-        "OpenStreetMap": layers.osm,
-        "Hike & Bike": layers.hikeBike,
-		"Satellit":layers.Esri_WorldImagery,
-		"Topogaphisch":layers.OpenTopoMap,
+        "OpenMap": layers.OpenMapSurfer_Roads,
+		"Topographisch": layers.OpenTopoMap,
+		"Satellit": layers.Esri_WorldImagery,
     }, {
         "Region Friaul": overview,
         "Provinzen": subregions,
-        "Gasthöfe": cluster_group,
         "Urbanisierungsgrad": urban,
         "Hillshade": hillshade,
     }).addTo(map);
