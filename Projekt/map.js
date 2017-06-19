@@ -14,7 +14,6 @@ window.onload = function() {
 		}),
     };
 
-
     var hillshade = L.tileLayer('http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a> <br> &copy; <a href="http://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units">EuroGeographics bezüglich der Verwaltungsgrenzen</a>'
     });
@@ -51,9 +50,6 @@ window.onload = function() {
     // add sidebar control
     map.addControl(sidebar);
 
-    // add cluster to map
-    //map.addLayer(cluster_group);
-
     // leaflet-hash aktivieren
     var hash = new L.Hash(map);
 
@@ -79,143 +75,6 @@ window.onload = function() {
         map.fitBounds(overview.getBounds());
     });
 
-    // GeoJSON Daten der Provinzen einfuegen
-    var subregions = L.geoJSON(window.subregion, {
-        weight: 1,
-    }).bindPopup(function(layer) {
-        var allInfo = '<h3>Provinz ' + layer.feature.properties.Name + '</h3>';
-        document.getElementById("regname").innerHTML = layer.feature.properties.Name;
-        document.getElementById("capname").innerHTML = window.provinfo[layer.feature.properties.Name].capital;
-        document.getElementById("bev").innerHTML = window.provinfo[layer.feature.properties.Name].bevprov;
-        document.getElementById("description").innerHTML = window.provinfo[layer.feature.properties.Name].info;
-        document.getElementById("info").innerHTML = "";
-        document.getElementById("regname2").innerHTML = layer.feature.properties.Name;
-        document.getElementById("capname2").innerHTML = window.provinfo[layer.feature.properties.Name].capital;
-        document.getElementById("bev2").innerHTML = window.provinfo[layer.feature.properties.Name].bevprov;
-        document.getElementById("description2").innerHTML = window.provinfo[layer.feature.properties.Name].info;
-        return allInfo;
-    });
-
-    // add sidebar according to fullscreen state "fs"
-    subregions.on('click', function() {
-        if (fs == true) {
-            sidebar.show();
-        } else {
-            sidebar.hide();
-        }
-    });
-
-    // hide sidebar when clicking outside of subregions/rest of map
-    map.on('click', function() {
-        sidebar.hide();
-    })
-
-    /*
-    var sublist = [];
-    for(i=0; i <window.subregion.features.length; i++) {
-        sublist[i] = window.subregion.features[i].properties.Name;
-    };
-    
-    map.on('popupclose', function() {
-        pIsOpen = false;
-        console.log(pIsOpen);
-    });
-    
-    
-    map.on('popupopen', function(e) {
-       if(e.popup._source.feature.properties in sublist){
-           console.log('blah');
-           sidebar.show();
-       };
-    });
-    showing sidebar if popup of layer is opened and entering fullscreen
-    */
-
-
-    //Provinz Friaul hinzufuegen
-    var overview = L.geoJSON(window.overview, {
-        style: function(feature) {
-            return {
-                color: 'grey',
-                weight: 1,
-            };
-        }
-    }).addTo(map);
-
-    overview.on('mouseover', function() {
-        overview.bindPopup('Region Friaul')
-        overview.on('mouseover', function() {
-            overview.openPopup();
-        });
-        overview.on('mouseout', function() {
-            overview.closePopup();
-        });
-    });
-
-    // Urbanisierungsgrad hinzufuegen
-    var urban = L.geoJSON(window.urbanization, {
-        weight: 1,
-        style: function(feature) {
-            if (feature.properties.DGURBA_CLA == 3) {
-                return {
-                    color: 'red'
-                };
-            } else if (feature.properties.DGURBA_CLA == 2) {
-                return {
-                    color: 'green'
-                };
-            } else if (feature.properties.DGURBA_CLA == 1) {
-                return {
-                    color: 'yellow'
-                };
-            }
-        }
-
-    });
-
-
-    //legend for urbanization
-    var legend = L.control({
-        position: 'bottomright'
-    });
-
-    function getColor(d) {
-        return d == 3 ? 'red' :
-            d == 2 ? 'green' :
-            d == 1 ? 'yellow' :
-            '#FFEDA0';
-    }
-
-    legend.onAdd = function(map) {
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [1, 2, 3],
-            label = "Urbanisierungsgrad";
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i]) + '"></i> ' + label + " " + grades[i] + '<br>';
-        }
-        div.innerHTML += '<p class="leg_desc">3/2/1:<br>dünne/mittlere/dichte Besiedelung</p>'
-        return div;
-    };
-
-    //legend.addTo(map);
-
-    // add/remove legend for degree of urbanization
-    map.on('layeradd', function() {
-        if (map.hasLayer(urban) == true) {
-            legend.addTo(map);
-            map.fitBounds(overview.getBounds(), {
-                paddingBottomRight: [200, 0]
-            });
-        }
-    });
-
-    map.on('layerremove', function() {
-        if (map.hasLayer(urban) == false)
-            legend.remove();
-    });
-
-
     //eigenen Nordpfeil hinzufuegen
     var north = L.control({
         position: "bottomleft"
@@ -226,6 +85,15 @@ window.onload = function() {
         return div;
     }
     north.addTo(map);
+	
+	//GPX Files
+	
+	omnivore.gpx('data/3Stelle.gpx').addTo(map);
+	
+	//Marker für Dordolla mit Info zum Projekt
+	
+	var marker = L.marker([46.467727, 13.191869]).addTo(map);
+	marker.bindPopup("<b>Dordolla!</b><br>Ihr perfekter Start- und Zielort um mit dem Mountainbike das Aupatal und die Geisterstädte zu erkunden.")
 
     // WMTS-Layer Auswahl hinzufügen
     var layerControl = L.control.layers({
@@ -233,11 +101,10 @@ window.onload = function() {
 		"Topographisch": layers.OpenTopoMap,
 		"Satellit": layers.Esri_WorldImagery,
     }, {
-        "Region Friaul": overview,
-        "Provinzen": subregions,
-        "Urbanisierungsgrad": urban,
-        "Hillshade": hillshade,
+                "Hillshade": hillshade,
     }).addTo(map);
+	
+	
 
 
     map.fitBounds(subregions.getBounds());
