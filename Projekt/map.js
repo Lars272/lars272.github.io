@@ -137,10 +137,71 @@ window.onload = function() {
 	map.fitBounds(Forca.getBounds());
             
 	});
+	
+	var Jouf = omnivore.gpx('data/JoufDiMuec.gpx').addTo(map);
+	Jouf.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Jouf Di Muec</h3>';
+            Jouf.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Jouf.getBounds());
+            
+	});
+	
+	var Raduna = omnivore.gpx('data/RadunoChiasut.gpx').addTo(map);
+	Raduna.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Raduno Chiasut</h3>';
+            Raduna.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Raduna.getBounds());
+            
+	});
+	
+	var Flop = omnivore.gpx('data/flop e altro.gpx').addTo(map);
+	Flop.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Otto del Monte Flop</h3>';
+            Flop.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Flop.getBounds());
+            
+	});
+	
+	var Giro = omnivore.gpx('data/giro infinito paularo.gpx').addTo(map);
+	Giro.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Giro Infinito Paularo</h3>';
+            Giro.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Giro.getBounds());
+            
+	});
 	//Marker für Dordolla mit Info zum Projekt
 	
 	var marker = L.marker([46.467727, 13.191869]).addTo(map);
 	marker.bindPopup("<b>Dordolla!</b><br>Ihr perfekter Start- und Zielort um mit dem Mountainbike das Aupatal und die Geisterstädte zu erkunden.")
+	
+	//Marker Geisterstädte
+	
+			var huts = [
+			L.marker([46.4365042,13.20996], {title: "Riulade", icon: L.icon({
+			iconAnchor: [16, 35],
+			iconUrl: 'icons/cabin-2.png'})}),
+			
+						L.marker([46.4174817,13.1480934], {title: "Mogessa di Qua", icon: L.icon({
+			iconAnchor: [16, 35],
+			iconUrl: 'icons/cabin-2.png'})}),
+								
+			];
+		
+		var hutslayer = L.featureGroup();
+		
+		for (var i=0; i < huts.length; i++) {
+			hutslayer.addLayer(huts[i]);				
+		};
+		
+		hutslayer.addTo(map);
 
     // WMTS-Layer Auswahl hinzufügen
     var layerControl = L.control.layers({
@@ -149,6 +210,7 @@ window.onload = function() {
 		"Satellit": layers.Esri_WorldImagery,
     }, {
                 "Hillshade": hillshade,
+				
     }).addTo(map);
 	
 };
