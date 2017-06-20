@@ -141,9 +141,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Raduno Chiasut</h3>';
             Raduna.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Raduna.getBounds());
-            
+			           
 	});
 	
 	var Flop = omnivore.gpx('data/flop e altro.gpx').addTo(map);
@@ -198,5 +196,7 @@ window.onload = function() {
 				"Geisterstädte": hutslayer,
 				
     }).addTo(map);
+	
+	map.fitBounds(marker.getBounds());
 	
 };
