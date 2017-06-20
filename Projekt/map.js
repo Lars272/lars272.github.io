@@ -92,10 +92,7 @@ window.onload = function() {
 	Trestelle.on('ready', function () {
             // Popup hinzufügen
             var markup = '<h3>Les Tres Stelle</h3>';
-            Trestelle.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Trestelle.getBounds());
-	            
+            Trestelle.bindPopup(markup, { maxWidth : 250 });          
 	
     });
             	
@@ -104,9 +101,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Balcon Di Provezi</h3>';
             Balcon.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Balcon.getBounds());
-            
+			            
 	});
 	
 	var Chiasut = omnivore.gpx('data/ChiasutDalSior.gpx').addTo(map);
@@ -114,9 +109,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Chiasut Dal Sior</h3>';
             Chiasut.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Chiasut.getBounds());
-            
+	            
 	});
 	
 	var Monticello = omnivore.gpx('data/Monticello.gpx').addTo(map);
@@ -124,9 +117,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Monte Monticello</h3>';
             Monticello.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Monticello.getBounds());
-            
+	            
 	});
 	
 	var Forca = omnivore.gpx('data/ForcaVualt.gpx').addTo(map);
@@ -134,8 +125,6 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Forca Vualt</h3>';
             Forca.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Forca.getBounds());
             
 	});
 	
@@ -144,9 +133,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Jouf Di Muec</h3>';
             Jouf.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Jouf.getBounds());
-            
+	            
 	});
 	
 	var Raduna = omnivore.gpx('data/RadunoChiasut.gpx').addTo(map);
@@ -164,9 +151,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Otto del Monte Flop</h3>';
             Flop.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Flop.getBounds());
-            
+	
 	});
 	
 	var Giro = omnivore.gpx('data/giro infinito paularo.gpx').addTo(map);
@@ -174,9 +159,7 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Giro Infinito Paularo</h3>';
             Giro.bindPopup(markup, { maxWidth : 250 });
-			
-	map.fitBounds(Giro.getBounds());
-            
+	            
 	});
 	//Marker für Dordolla mit Info zum Projekt
 	
