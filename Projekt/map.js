@@ -86,13 +86,35 @@ window.onload = function() {
     }
     north.addTo(map);
 	
-				
+	//Letzter klick trakc
+	var lastClick = null;
+	
 	//Alle Tracks laden
 	var Trestelle = omnivore.gpx('data/3Stelle.gpx').addTo(map);
 	Trestelle.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Les Tres Stelle</h3>';
-            Trestelle.bindPopup(markup, { maxWidth : 250 });          
+            var markup = '<h3>Les Tres Stelle!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter bergauf: 3000</p>';
+				markup += '<p>Streckenlänge (in km): 45</p>';
+				markup += '<p>Beschreibung (Italienisch): Itinerario molto lungo e faticoso, che richiede ottimo allenamento e ottima tecnica di guida. Prevede in sequenza Chiasut dal Sior, Jouf di Muec e M.te Monticello.E’ stato ideato dal Centro Nazionale MTB di Moggio  per una manifestazione stile randonee e per visitare gran parte del territorio e delle sue possibilità ciclistiche in unica soluzione.</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=5800">Download GPX Track</a></p>';
+				Forca.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Trestelle.on('click', function(evt) {
+				map.fitBounds(Forca.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});        
 	
     });
             	
@@ -123,7 +145,7 @@ window.onload = function() {
 	var Forca = omnivore.gpx('data/ForcaVualt.gpx').addTo(map);
 	
             		
-				Forca.on('ready', function () {
+		Forca.on('ready', function () {
 				// Popup hinzufügen
 				var markup = '<h3>Forca del Vualt!</h3>';
 				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
@@ -132,8 +154,24 @@ window.onload = function() {
 				markup += '<p>Beschreibung (Italienisch): Itinerario con salita pedalabile e discesa su sentiero a tratti tecnico. Possibilità di accorciare il rientro scendendo direttamente da Dordolla in val Aupa per asfalto</p>';
 				markup += '<p><a href="http://www.carniabike.it/?page_id=5800">Download GPX Track</a></p>';
 				Forca.bindPopup(markup, { maxWidth : 450 })
-            
-	});
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Forca.on('click', function(evt) {
+				map.fitBounds(Forca.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
+				
+			});
+		
 	
 	var Jouf = omnivore.gpx('data/JoufDiMuec.gpx').addTo(map);
 	Jouf.on('ready', function () {
