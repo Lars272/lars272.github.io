@@ -86,10 +86,57 @@ window.onload = function() {
     }
     north.addTo(map);
 	
-	//GPX Files
+			
+	//Alle Tracks laden
+	var Trestelle = omnivore.gpx('data/3Stelle.gpx').addTo(map);
+	Trestelle.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Les Tres Stelle</h3>';
+            Trestelle.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Trestelle.getBounds());
+            
+	});
 	
-	omnivore.gpx('data/3Stelle.gpx').addTo(map);
+	var Balcon = omnivore.gpx('data/BalconDiProvezi.gpx').addTo(map);
+	Balcon.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Balcon Di Provezi</h3>';
+            Balcon.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Balcon.getBounds());
+            
+	});
 	
+	var Chiasut = omnivore.gpx('data/ChiasutDalSior.gpx').addTo(map);
+	Chiasut.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Chiasut Dal Sior</h3>';
+            Chiasut.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Chiasut.getBounds());
+            
+	});
+	
+	var Monticello = omnivore.gpx('data/Monticello.gpx').addTo(map);
+	Monticello.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Monte Monticello</h3>';
+            Monticello.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Monticello.getBounds());
+            
+	});
+	
+	var Forca = omnivore.gpx('data/ForcaVualt.gpx').addTo(map);
+	Forca.on('ready', function () {
+            // Popup hinzufügen
+            var markup = '<h3>Forca Vualt</h3>';
+            Forca.bindPopup(markup, { maxWidth : 250 });
+			
+	map.fitBounds(Forca.getBounds());
+            
+	});
 	//Marker für Dordolla mit Info zum Projekt
 	
 	var marker = L.marker([46.467727, 13.191869]).addTo(map);
@@ -104,8 +151,4 @@ window.onload = function() {
                 "Hillshade": hillshade,
     }).addTo(map);
 	
-	
-
-
-    map.fitBounds(subregions.getBounds());
 };
