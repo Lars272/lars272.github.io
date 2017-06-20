@@ -86,6 +86,23 @@ window.onload = function() {
     }
     north.addTo(map);
 	
+	//Elevation
+	var el = L.control.elevation({
+  	position: "bottomright",
+	theme: "steelblue-theme", //default: lime-theme
+	width: 400,
+	height: 200,
+	margins: {
+		top: 10,
+		right: 20,
+		bottom: 30,
+		left: 50
+	},
+	});
+	el.addTo(map);
+	
+		
+	
 	//Letzter klick trakc
 	var lastClick = null;
 	
@@ -113,7 +130,12 @@ window.onload = function() {
 				}
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
-				});        
+				});   
+				
+				//Höhenprofil
+				Trestelle.eachLayer(function(layer) {
+                el.addData(layer.feature);
+				});
 	
     });
             	
@@ -140,6 +162,11 @@ window.onload = function() {
 				}
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
+				});
+				
+				//Höhenprofil
+				Balcon.eachLayer(function(layer) {
+                el.addData(layer.feature);
 				});
 			            
 	});
@@ -168,6 +195,11 @@ window.onload = function() {
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
 				});
+				
+				//Höhenprofil
+				Chiasut.eachLayer(function(layer) {
+                el.addData(layer.feature);
+				});
 	            
 	});
 	
@@ -194,6 +226,11 @@ window.onload = function() {
 				}
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
+				});
+				
+				//Höhenprofil
+				Monticello.eachLayer(function(layer) {
+                el.addData(layer.feature);
 				});
 	            
 	});
@@ -225,6 +262,11 @@ window.onload = function() {
 				evt.layer.setStyle({color:"yellow"});
 				});
 				
+				//Höhenprofil
+				Forca.eachLayer(function(layer) {
+                el.addData(layer.feature);
+				});
+				
 			});
 		
 	
@@ -251,6 +293,11 @@ window.onload = function() {
 				}
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
+				});
+				
+				//Höhenprofil
+				Jouf.eachLayer(function(layer) {
+                el.addData(layer.feature);
 				});
 	            
 	});
@@ -279,6 +326,11 @@ window.onload = function() {
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
 				});
+				
+				//Höhenprofil
+				Raduna.eachLayer(function(layer) {
+                el.addData(layer.feature);
+				});
 			           
 	});
 	
@@ -306,6 +358,11 @@ window.onload = function() {
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
 				});
+				
+				//Höhenprofil
+				Flop.eachLayer(function(layer) {
+                el.addData(layer.feature);
+				});
 	
 	});
 	
@@ -332,6 +389,11 @@ window.onload = function() {
 				}
 				console.log(evt.layer)
 				evt.layer.setStyle({color:"yellow"});
+				});
+				
+				//Höhenprofil
+				Giro.eachLayer(function(layer) {
+                el.addData(layer.feature);
 				});
 	});
 	//Popup mit Unterkunft
