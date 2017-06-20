@@ -73,7 +73,7 @@ a:hover:not(.active) {
     left: 2%;
     right: 2%;
     bottom: 0;
-    height: 400px;
+    height: 600px;
     background: #fff;
 }
 #map {
@@ -99,7 +99,7 @@ a:hover:not(.active) {
 #credits {
     font-size: 10px;
     position: absolute;
-    top: 600px;
+    top: 800px;
     left: 2%;
     right: 2%;
 }

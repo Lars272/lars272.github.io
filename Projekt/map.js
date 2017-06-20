@@ -95,11 +95,10 @@ window.onload = function() {
             // Popup hinzufügen
             var markup = '<h3>Les Tres Stelle!</h3>';
 				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
-				markup += '<p>Höhenmeter bergauf: 3000</p>';
+				markup += '<p>Höhenmeter: 3000</p>';
 				markup += '<p>Streckenlänge (in km): 45</p>';
-				markup += '<p>Beschreibung (Italienisch): Itinerario molto lungo e faticoso, che richiede ottimo allenamento e ottima tecnica di guida. Prevede in sequenza Chiasut dal Sior, Jouf di Muec e M.te Monticello.E’ stato ideato dal Centro Nazionale MTB di Moggio  per una manifestazione stile randonee e per visitare gran parte del territorio e delle sue possibilità ciclistiche in unica soluzione.</p>';
-				markup += '<p><a href="http://www.carniabike.it/?page_id=5800">Download GPX Track</a></p>';
-				Forca.bindPopup(markup, { maxWidth : 450 })
+				markup += '<p><a href="http://www.carniabike.it/?page_id=5829">Download GPX Track</a></p>';
+				Trestelle.bindPopup(markup, { maxWidth : 450 })
 				
 				
 				//Zoom und Gelbe Einfärbung hinzufügen 
@@ -121,24 +120,81 @@ window.onload = function() {
 	var Balcon = omnivore.gpx('data/BalconDiProvezi.gpx').addTo(map);
 	Balcon.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Balcon Di Provezi</h3>';
-            Balcon.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Balcon Di Provezi!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter: 600</p>';
+				markup += '<p>Streckenlänge (in km): 11</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=3137">Download GPX Track</a></p>';
+				Balcon.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Balcon.on('click', function(evt) {
+				map.fitBounds(Balcon.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 			            
 	});
 	
 	var Chiasut = omnivore.gpx('data/ChiasutDalSior.gpx').addTo(map);
 	Chiasut.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Chiasut Dal Sior</h3>';
-            Chiasut.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Chiasut Dal Sior!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter: 1400</p>';
+				markup += '<p>Streckenlänge (in km): 27</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=5813">Download GPX Track</a></p>';
+				Chiasut.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Chiasut.on('click', function(evt) {
+				map.fitBounds(Chiasut.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 	            
 	});
 	
 	var Monticello = omnivore.gpx('data/Monticello.gpx').addTo(map);
 	Monticello.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Monte Monticello</h3>';
-            Monticello.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Monte Monticello!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Schwer.</p>'
+				markup += '<p>Höhenmeter: 1000</p>';
+				markup += '<p>Streckenlänge (in km): 15</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=3214">Download GPX Track</a></p>';
+				Monticello.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Monticello.on('click', function(evt) {
+				map.fitBounds(Monticello.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 	            
 	});
 	
@@ -149,9 +205,8 @@ window.onload = function() {
 				// Popup hinzufügen
 				var markup = '<h3>Forca del Vualt!</h3>';
 				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
-				markup += '<p>Höhenmeter bergauf: 1000</p>';
+				markup += '<p>Höhenmeter: 1000</p>';
 				markup += '<p>Streckenlänge (in km): 24</p>';
-				markup += '<p>Beschreibung (Italienisch): Itinerario con salita pedalabile e discesa su sentiero a tratti tecnico. Possibilità di accorciare il rientro scendendo direttamente da Dordolla in val Aupa per asfalto</p>';
 				markup += '<p><a href="http://www.carniabike.it/?page_id=5800">Download GPX Track</a></p>';
 				Forca.bindPopup(markup, { maxWidth : 450 })
 				
@@ -176,33 +231,108 @@ window.onload = function() {
 	var Jouf = omnivore.gpx('data/JoufDiMuec.gpx').addTo(map);
 	Jouf.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Jouf Di Muec</h3>';
-            Jouf.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Jouf di Muec!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter: 600</p>';
+				markup += '<p>Streckenlänge (in km): 14</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=5804">Download GPX Track</a></p>';
+				Jouf.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Jouf.on('click', function(evt) {
+				map.fitBounds(Jouf.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 	            
 	});
 	
 	var Raduna = omnivore.gpx('data/RadunoChiasut.gpx').addTo(map);
 	Raduna.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Raduno Chiasut</h3>';
-            Raduna.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Raduna Chiasut!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Anspruchsvoll.</p>'
+				markup += '<p>Höhenmeter: 1500</p>';
+				markup += '<p>Streckenlänge (in km): 20</p>';
+				markup += '<p><a href="http://www.carniabike.it/trofeocarniamtb/?page_id=3779">Download GPX Track</a></p>';
+				Raduna.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Raduna.on('click', function(evt) {
+				map.fitBounds(Raduna.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 			           
 	});
 	
 	var Flop = omnivore.gpx('data/flop e altro.gpx').addTo(map);
 	Flop.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Otto del Monte Flop</h3>';
-            Flop.bindPopup(markup, { maxWidth : 250 });
+            var markup = '<h3>Otto del Monte Flop!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Schwer.</p>'
+				markup += '<p>Höhenmeter: 2400</p>';
+				markup += '<p>Streckenlänge (in km): 40</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=4044">Download GPX Track</a></p>';
+				Flop.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Flop.on('click', function(evt) {
+				map.fitBounds(Flop.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 	
 	});
 	
 	var Giro = omnivore.gpx('data/giro infinito paularo.gpx').addTo(map);
 	Giro.on('ready', function () {
             // Popup hinzufügen
-            var markup = '<h3>Giro Infinito Paularo</h3>';
-            Giro.bindPopup(markup, { maxWidth : 250 });
-	            
+            var markup = '<h3>Giro Infinito Paularo!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter: 3000</p>';
+				markup += '<p>Streckenlänge (in km): 67</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=3133">Download GPX Track</a></p>';
+				Giro.bindPopup(markup, { maxWidth : 450 })
+				
+				
+				//Zoom und Gelbe Einfärbung hinzufügen 
+				Giro.on('click', function(evt) {
+				map.fitBounds(Giro.getBounds());
+				if (lastClick){
+					lastClick.setStyle({color:"blue"});
+					lastClick = evt.layer
+				}
+				else {
+					lastClick = evt.layer
+				}
+				console.log(evt.layer)
+				evt.layer.setStyle({color:"yellow"});
+				});
 	});
 	//Popup mit Unterkunft
 	
