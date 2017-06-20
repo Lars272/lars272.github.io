@@ -87,19 +87,19 @@ window.onload = function() {
     north.addTo(map);
 	
 	//Elevation
-	var el = L.control.elevation({
-  	position: "bottomright",
-	theme: "steelblue-theme", //default: lime-theme
-	width: 400,
-	height: 200,
-	margins: {
-		top: 10,
-		right: 20,
-		bottom: 30,
-		left: 50
-	},
-	});
-	el.addTo(map);
+	//var el = L.control.elevation({
+  	//position: "bottomright",
+	//theme: "steelblue-theme", //default: lime-theme
+	//width: 400,
+	//height: 200,
+	//margins: {
+		//top: 10,
+		//right: 20,
+		//bottom: 30,
+		//left: 50
+	//},
+	//});
+	//el.addTo(map);
 	
 		
 	
