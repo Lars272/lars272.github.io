@@ -57,16 +57,13 @@ window.onload = function() {
     var fs = false;
 
     // events are fired when entering or exiting fullscreen.
-    map.on('enterFullscreen', function() {
-        fs = true;
-        if (map.hasLayer(urban)) {
-            map.fitBounds(overview.getBounds(), {
-                paddingBottomRight: [200, 0]
-            });
-        } else {
-            map.fitBounds(overview.getBounds());
-        }
-    });
+    map.on('fullscreenchange', function () {
+    if (map.isFullscreen()) {
+        console.log('entered fullscreen');
+    } else {
+        console.log('exited fullscreen');
+    }
+});
 
     // events fired when exiting fullscreen
     map.on('exitFullscreen', function() {
