@@ -86,7 +86,7 @@ window.onload = function() {
     }
     north.addTo(map);
 	
-			
+				
 	//Alle Tracks laden
 	var Trestelle = omnivore.gpx('data/3Stelle.gpx').addTo(map);
 	Trestelle.on('ready', function () {
@@ -95,9 +95,10 @@ window.onload = function() {
             Trestelle.bindPopup(markup, { maxWidth : 250 });
 			
 	map.fitBounds(Trestelle.getBounds());
-            
-	});
+	            
 	
+    });
+            	
 	var Balcon = omnivore.gpx('data/BalconDiProvezi.gpx').addTo(map);
 	Balcon.on('ready', function () {
             // Popup hinzufügen
@@ -185,16 +186,17 @@ window.onload = function() {
 	//Marker Geisterstädte
 	
 			var huts = [
-			L.marker([46.4365042,13.20996], {title: "Riulade", icon: L.icon({
+			L.marker([46.44007,13.21288], {title: "Riulade", icon: L.icon({
 			iconAnchor: [16, 35],
 			iconUrl: 'icons/cabin-2.png'})}),
+				
 			
-						L.marker([46.4174817,13.1480934], {title: "Mogessa di Qua", icon: L.icon({
+			L.marker([46.41756,13.15268], {title: "Mogessa di Qua", icon: L.icon({
 			iconAnchor: [16, 35],
 			iconUrl: 'icons/cabin-2.png'})}),
 								
 			];
-		
+					
 		var hutslayer = L.featureGroup();
 		
 		for (var i=0; i < huts.length; i++) {
@@ -210,6 +212,7 @@ window.onload = function() {
 		"Satellit": layers.Esri_WorldImagery,
     }, {
                 "Hillshade": hillshade,
+				"Geisterstädte": hutslayer,
 				
     }).addTo(map);
 	
