@@ -121,10 +121,17 @@ window.onload = function() {
 	});
 	
 	var Forca = omnivore.gpx('data/ForcaVualt.gpx').addTo(map);
-	Forca.on('ready', function () {
-            // Popup hinzufügen
-            var markup = '<h3>Forca Vualt</h3>';
-            Forca.bindPopup(markup, { maxWidth : 250 });
+	
+            		
+				Forca.on('ready', function () {
+				// Popup hinzufügen
+				var markup = '<h3>Forca del Vualt!</h3>';
+				markup += '<p>Schwierigkeitsgrad: Sehr Schwer.</p>'
+				markup += '<p>Höhenmeter bergauf: 1000</p>';
+				markup += '<p>Streckenlänge (in km): 24</p>';
+				markup += '<p>Beschreibung (Italienisch): Itinerario con salita pedalabile e discesa su sentiero a tratti tecnico. Possibilità di accorciare il rientro scendendo direttamente da Dordolla in val Aupa per asfalto</p>';
+				markup += '<p><a href="http://www.carniabike.it/?page_id=5800">Download GPX Track</a></p>';
+				Forca.bindPopup(markup, { maxWidth : 450 })
             
 	});
 	
@@ -159,10 +166,12 @@ window.onload = function() {
             Giro.bindPopup(markup, { maxWidth : 250 });
 	            
 	});
-	//Marker für Dordolla mit Info zum Projekt
+	//Popup mit Unterkunft
 	
-	var marker = L.marker([46.467727, 13.191869]).addTo(map);
-	marker.bindPopup("<b>Dordolla!</b><br>Ihr perfekter Start- und Zielort um mit dem Mountainbike das Aupatal und die Geisterstädte zu erkunden.")
+	var popup = L.popup()
+    .setLatLng([46.467727, 13.191869])
+    .setContent("<b>Dordolla!</b><br>Ihr perfekter Start- und Zielort um mit dem Mountainbike das Aupatal und die Geisterstädte zu erkunden.<br> Nächtigen Sie zum Beispiel authentisch bei Kaspar: http://de.tiereviere.net/zubesuch/urlaubambauernhof")
+    .openOn(map);
 	
 	//Marker Geisterstädte
 	
@@ -197,6 +206,6 @@ window.onload = function() {
 				
     }).addTo(map);
 	
-	map.fitBounds(marker.getBounds());
+	map.fitBounds(popup.getBounds());
 	
 };

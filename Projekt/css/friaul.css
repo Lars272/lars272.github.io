@@ -79,7 +79,7 @@ a:hover:not(.active) {
 #map {
     position: absolute;
     top: 0;
-    width: 60%;
+    width: 70%;
     height: 100%;
     float: left;
     bottom: 0;
@@ -87,7 +87,7 @@ a:hover:not(.active) {
     background: #fff;
 }
 #mapinfo {
-    width: 38%;
+    width: 28%;
     padding-left: 1%;
     padding-right: 1%;
     height: 100%;
